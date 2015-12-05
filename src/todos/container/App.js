@@ -8,11 +8,12 @@ import TodoList from '../components/TodoList.js'
 
 class App extends Component {
   render(){
-    const {dispatch, todos} = this.props;
+    const {dispatch, todos, isLoading} = this.props;
     const actions = bindActionCreators(TodoActions, dispatch)
     return (
       <div className="todoapp">
         <Header
+          isLoading = {isLoading}
           onAddTodo={(text)=>{
             dispatch(addTodo(text))
           }}

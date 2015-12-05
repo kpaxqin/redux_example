@@ -7,12 +7,11 @@ import {Provider} from 'react-redux'
 import reducers from './reducers'
 import createLogger from 'redux-logger'
 import thunk from 'redux-thunk'
-
-console.log(process.env.NODE_ENV);
-console.log(process.env.config);
+import loadingMiddleWare from './middlewares/loadingMiddleWare'
 
 const store = applyMiddleware(
   thunk,
+  loadingMiddleWare,
   createLogger()
 )(createStore)(reducers, {todos: [{text: 'adfsadsf', id: 0}]});
 

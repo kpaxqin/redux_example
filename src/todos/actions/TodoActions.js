@@ -2,53 +2,39 @@
  * Created by jwqin on 11/16/15.
  */
 import _ from 'lodash'
+import {createAsyncAction} from '../helpers/actionHelpers.js'
 
-function addTodo(text){
-  return {
-    type: 'ADD_TODO',
-    payload: text
-  }
+function apiMock(resp, err = new Error('Oops')) {
+  return new Promise(function(resolve, reject){
+    setTimeout(()=>{
+      Math.random() < 0.7 ?
+        resolve(resp):
+        reject(err);
+    }, 300)
+  });
 }
-function addTodoCompleted(res){
-  return {
-    type: 'ADD_TODO_COMPLETED',
-    payload: res
-  }
-}
-function addTodoFailed(err){
-  return {
-    type: 'ADD_TODO_FAILED',
-    payload: err
-  }
-}
-
 
 export default {
-  addTodo(text){
-    //return {
-    //  type: 'ADD_TODO',
-    //  payload: text
-    //}
-    return function(dispatch, getState){
-      addTodo(text);
-      const todos = getState().todos;
-      setTimeout(()=>{
-        Math.random() > 0.5 ?
-          dispatch(addTodoCompleted({
-            id: _.reduce(todos, (max, item)=>Math.max(max, item.id), -1) + 1,
-            text
-          })):
-          dispatch(addTodoFailed({}));
-      }, 200)
-    }
-  },
-  editTodo(id, todo){
-    return {
-      type: 'EDIT_TODO',
-      payload: {
-        id,
-        todo
-      }
+  addTodo: createAsyncAction('ADD_TODO', function(text) {
+    return apiMock({
+      id: _.uniqueId('TODO_'),
+      text
+    })
+  }),
+  //Use thunk for optimistic update
+  //since editTodoAction returned by createAsyncAction is a thunk too, so the editTodo comes to be a composed thunk.
+  editTodo: function (todo) {
+    return function (dispatch, getState) {
+      const oldTodo = _.find(getState().todos, item=>item.id === todo.id);
+
+      const editTodoAction = createAsyncAction('EDIT_TODO', function (todo) {
+        const error = new Error('shit');
+        error.old = oldTodo;
+
+        return apiMock(todo, error);
+      });
+
+      dispatch(editTodoAction(todo));
     }
   },
   deleteTodo(id){

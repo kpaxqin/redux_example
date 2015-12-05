@@ -26,7 +26,7 @@ class TodoItem extends Component {
           editing
           text={todo.text}
           onSave={(text)=>{
-            editTodo(todo.id, {id: todo.id, text});
+            editTodo({id: todo.id, text});
             this.setState({ editing: false });
           }}
           />
