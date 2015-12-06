@@ -1,9 +1,6 @@
 import _ from 'lodash'
-import {steps} from '../helpers/actionHelpers.js'
+import {steps} from 'redux-promise-thunk'
 
-/*
-*
-* */
 function loadingMiddleWare({dispatch}) {
   return next => action => {
     const asyncStep = _.get(action, 'meta.asyncStep');

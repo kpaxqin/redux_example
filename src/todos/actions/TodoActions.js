@@ -2,7 +2,7 @@
  * Created by jwqin on 11/16/15.
  */
 import _ from 'lodash'
-import {createAsyncAction} from '../helpers/actionHelpers.js'
+import {createPromiseThunk} from 'redux-promise-thunk'
 
 function apiMock(resp, err = new Error('Oops')) {
   return new Promise(function(resolve, reject){
@@ -15,19 +15,19 @@ function apiMock(resp, err = new Error('Oops')) {
 }
 
 export default {
-  addTodo: createAsyncAction('ADD_TODO', function(text) {
+  addTodo: createPromiseThunk('ADD_TODO', function(text) {
     return apiMock({
       id: _.uniqueId('TODO_'),
       text
     })
   }),
   //Use thunk for optimistic update
-  //since editTodoAction returned by createAsyncAction is a thunk too, so the editTodo comes to be a composed thunk.
+  //since editTodoAction returned by createPromiseThunk is a thunk too, so the editTodo comes to be a composed thunk.
   editTodo: function (todo) {
     return function (dispatch, getState) {
       const oldTodo = _.find(getState().todos, item=>item.id === todo.id);
 
-      const editTodoAction = createAsyncAction('EDIT_TODO', function (todo) {
+      const editTodoAction = createPromiseThunk('EDIT_TODO', function (todo) {
         const error = new Error('shit');
         error.old = oldTodo;
 
