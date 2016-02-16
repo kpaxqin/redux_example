@@ -11,12 +11,13 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
-    './src/todos/index.jsx'
+    './src/index.jsx'
   ],
   output: {
     path: path.join(__dirname, '_dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: './_dist/',
+    chunkFilename: "[hash].js"
   },
   module: {
     loaders: [{
@@ -28,6 +29,13 @@ module.exports = {
       test: /\.css?$/,
       loaders: ['style', 'raw'],
       include: __dirname
+    }, {
+      test: /\.scss$/,
+      loader: "style!css!sass?includePaths[]=" + path.resolve(__dirname, "./node_modules/"),
+      include: __dirname
+    }, {
+      test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff2?$|\.ttf|\.eot$/,
+      loader: "file"
     }]
   },
   resolve: {
