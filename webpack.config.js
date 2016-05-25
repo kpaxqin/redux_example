@@ -11,12 +11,12 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
-    './src/index.jsx'
+    './src/todos/index.jsx'
   ],
   output: {
     path: path.join(__dirname, '_dist'),
     filename: 'bundle.js',
-    publicPath: './_dist/',
+    publicPath: '/_dist/',
     chunkFilename: "[hash].js"
   },
   module: {

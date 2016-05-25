@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack --watch"
+    "start": "webpack-dev-server --hot --progress --colors --inline"
   },
   "author": "kpaxqin",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "sass-loader": "^3.1.2",
     "style-loader": "^0.12.3",
     "todomvc-app-css": "^2.0.3",
-    "webpack": "^1.12.6"
+    "webpack": "^1.12.6",
+    "webpack-dev-server": "^1.14.1"
   }
 }
