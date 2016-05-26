@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
@@ -8,7 +8,7 @@ const store = applyMiddleware(
   thunk,
   loadingMiddleWare,
   createLogger()
-)(createStore)(reducers, {todos: [{text: 'fff123', id: 1}]});
+)(createStore)(combineReducers(reducers), {todos: [{text: 'fff123', id: 1}]});
 
 if (module.hot) {
   module.hot.accept(['./reducers'], () => {

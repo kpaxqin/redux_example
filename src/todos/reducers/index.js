@@ -1,10 +1,9 @@
 /**
  * Created by jwqin on 11/15/15.
  */
-import {combineReducers} from 'redux'
 import _ from 'lodash'
 
-export default combineReducers({
+export default {
   todos: function (state = [], action){
     const {type, payload, error} = action;
     switch (type){
@@ -34,4 +33,4 @@ export default combineReducers({
     }
     return state;
   }
-})
+}
