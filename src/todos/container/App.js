@@ -14,7 +14,9 @@ class App extends Component {
       <div className="todoapp">
         <Header
           isLoading = {isLoading}
-          onAddTodo={actions.addTodo}
+          onAddTodo={(text)=>{
+            dispatch(addTodo(text))
+          }}
           ></Header>
         <section className="main">
           <TodoList todos={todos} actions={actions}></TodoList>
