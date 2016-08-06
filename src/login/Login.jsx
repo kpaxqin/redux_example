@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import { routeActions } from 'react-router-redux'
+import {routerActions} from 'react-router-redux'
 import LoginForm from './LoginForm'
 
 const style = {
@@ -10,7 +10,7 @@ const style = {
 
 class Login extends Component {
   onSubmit(data) {
-    console.log(data, 'submit');
+    console.log(data, 'submit111');
     this.props.push('/dashboard')
   }
   render() {
@@ -24,4 +24,4 @@ class Login extends Component {
   }
 }
 
-export default connect(state=> state, routeActions)(Login);
+export default connect(state=> state, routerActions)(Login);

@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {Input, Button} from 'react-bootstrap'
-import _ from 'lodash'
+import {FormControl as Input, FormGroup, Button} from 'react-bootstrap'
 import {reduxForm} from 'redux-form'
 
 class LoginForm extends Component {
@@ -9,15 +8,14 @@ class LoginForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Input
-          type='text'
-          label='name'
-          bsStyle={name.error ? 'error': undefined}
-          help={name.error}
-          {...name}
+        <FormGroup validationState={name.error? 'error': undefined}>
+          <Input
+            type='text'
+            label='name'
+            value={name.value || ''}
+            onChange={name.onChange}
           />
-        <Input type="radio" label="Radio 1" name="radio" value={1} />
-        <Input type="radio" label="Radio 2" name="radio" value={2} />
+        </FormGroup>
         <Button
           type='submit'
           >
@@ -28,10 +26,11 @@ class LoginForm extends Component {
   }
 }
 
-export default reduxForm({
+const ReduxLoginForm = reduxForm({
   form: 'login',
   fields: ['name'],
   validate(value) {
+    debugger
     const errors = {};
     if (value.name === '123') {
       errors.name = 'shit';
@@ -40,3 +39,5 @@ export default reduxForm({
     return errors;
   }
 })(LoginForm);
+
+export default ReduxLoginForm

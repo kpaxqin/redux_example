@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
-import {Router, Route, IndexRoute} from 'react-router'
-import createHashHistory from 'history/lib/createHashHistory.js'
+import {Route, IndexRoute} from 'react-router'
 import Login from './login/Login.jsx'
 import Dashboard from './dashboard/Index.jsx';
-
-const history = createHashHistory();
 
 class App extends Component {
   render() {
@@ -13,7 +10,6 @@ class App extends Component {
 }
 
 const routes = (
-  <Router history={history} >
     <Route
       path='/'
       component={App}
@@ -28,7 +24,6 @@ const routes = (
         />
       <IndexRoute component={Login}/>
     </Route>
-  </Router>
 );
 
-export default {routes, history};
+export default routes;
