@@ -1,9 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import {findDOMNode} from 'react-dom'
 import {connect} from 'react-redux'
-import _ from 'lodash'
 import { routeActions } from 'react-router-redux'
-import LoginForm from './LoginForm.jsx'
+import LoginForm from './LoginForm'
 
 const style = {
   width: 500,
@@ -26,7 +24,4 @@ class Login extends Component {
   }
 }
 
-export default connect(function(state) {
-
-  return state.login;
-}, routeActions)(Login);
+export default connect(state=> state, routeActions)(Login);

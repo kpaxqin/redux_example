@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import {Router, Route, Redirect, IndexRoute} from 'react-router'
+import {Router, Route, IndexRoute} from 'react-router'
 import createHashHistory from 'history/lib/createHashHistory.js'
 import Login from './login/Login.jsx'
 import Dashboard from './dashboard/Index.jsx';
-
-import {connect} from 'react-redux'
 
 const history = createHashHistory();
 

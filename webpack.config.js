@@ -10,8 +10,12 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
+  devserver: {
+    hostname: '0.0.0.0',
+    port: '3000'
+  },
   entry: [
-    './src/todos/index.jsx'
+    './src/index.jsx'
   ],
   output: {
     path: path.join(__dirname, '_dist'),
@@ -22,7 +26,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loader: 'babel',
+      loaders: ['react-hot', 'babel'],
       exclude: /node_modules/,
       include: __dirname
     }, {
@@ -41,7 +45,8 @@ module.exports = {
   resolve: {
     extensions: ['', '.jsx', '.js']
   },
-  plugins: [new webpack.DefinePlugin({
+  plugins: [
+    new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.config': JSON.stringify(config)
   })]
