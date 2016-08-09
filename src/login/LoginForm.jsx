@@ -30,9 +30,8 @@ const ReduxLoginForm = reduxForm({
   form: 'login',
   fields: ['name'],
   validate(value) {
-    debugger
     const errors = {};
-    if (value.name === '123') {
+    if (value.name === '1234') {
       errors.name = 'shit';
     }
 
